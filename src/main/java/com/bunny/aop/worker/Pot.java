@@ -1,11 +1,14 @@
 package com.bunny.aop.worker;
 
+import com.bunny.aop.annotation.ReadOnly;
+import com.bunny.aop.annotation.ReadWriteLockManaged;
 import com.bunny.aop.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@ReadWriteLockManaged
 public class Pot {
 
     @Autowired
@@ -31,6 +34,7 @@ public class Pot {
     }
 
     @Transactional
+    @ReadOnly
     public void queryAnimal() {
 //        可以正常执行
         jdbcTemplate.execute("insert into products (id, name, description, price) values(1006,'ProductE', 'Product E description', 5)");
